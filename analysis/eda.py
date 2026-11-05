@@ -6,17 +6,17 @@ df = pd.read_csv("data/processed/cleaned_superstore.csv")
 
 # Display basic information
 print("Dataset Shape:", df.shape)
-
 print("\nColumn Names:")
 print(df.columns.tolist())
-
 print("\nFirst 5 Records:")
 print(df.head())
 
 #catagorywise sale
 category_sales = df.groupby("Category")["Sales"].sum()
+
 #sorting sales
 category_sales = category_sales.sort_values(ascending=False)
+
 #print categorywise sales
 print("\nCategorywise sales: ")
 print(category_sales)

@@ -1,6 +1,7 @@
 from flask import Flask
 from config import Config
 from database.db import db
+from database.models import SalesRecord, Upload
 
 # Create Flask application
 app = Flask(__name__)
@@ -10,6 +11,8 @@ app.config.from_object(Config)
 
 # Initialize database
 db.init_app(app)
+with app.app_context():
+    db.create_all()
 
 
 @app.route("/")
