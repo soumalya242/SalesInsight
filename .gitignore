@@ -1,3 +1,5 @@
 .vscode
 .env
 analysis\__pycache__
+venv/
+__pycache__/
