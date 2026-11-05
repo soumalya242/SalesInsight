@@ -1,5 +1,5 @@
 import pandas as pd
-
+import plotly.express as px
 
 def calculate_total_sales(df):
     """
@@ -124,3 +124,30 @@ def get_monthly_profit(df):
     )
 
     return monthly_profit
+
+
+def create_monthly_sales_chart(df):
+    """
+    Create a line chart showing monthly sales.
+    """
+
+    monthly_sales = get_monthly_sales(df)
+
+    chart_data = monthly_sales.reset_index()
+
+    chart_data["Year-Month"] = chart_data["Year-Month"].astype(str)
+
+    fig = px.line(
+        chart_data,
+        x="Year-Month",
+        y="Sales",
+        title="Monthly Sales Trend",
+        markers=True
+    )
+
+    fig.update_layout(
+        xaxis_title="Month",
+        yaxis_title="Sales ($)"
+    )
+
+    return fig
