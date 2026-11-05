@@ -52,3 +52,75 @@ def calculate_average_order_value(df):
     average_order_value = total_sales / total_orders
 
     return average_order_value
+
+def get_category_sales(df):
+    """
+    Calculate total sales by product category.
+    """
+
+    category_sales = (
+        df.groupby("Category")["Sales"]
+        .sum()
+        .sort_values(ascending=False)
+    )
+    return category_sales
+
+
+def get_region_analysis(df):
+    """
+    Calculate total sales and profit by region.
+    """
+
+    region_analysis = (
+        df.groupby("Region")[["Sales", "Profit"]]
+        .sum()
+        .sort_values(by="Sales", ascending=False)
+    )
+
+    return region_analysis
+
+
+def get_monthly_sales(df):
+    """
+    Calculate total sales for each month.
+    """
+    df = df.copy()
+    df["Order Date"] = pd.to_datetime(df["Order Date"])
+    df["Year-Month"] = df["Order Date"].dt.to_period("M")
+    monthly_sales = (
+        df.groupby("Year-Month")["Sales"]
+        .sum()
+    )
+    return monthly_sales
+
+def get_top_products(df, limit=10):
+    """
+    Get top products based on total sales.
+    """
+
+    top_products = (
+        df.groupby("Product Name")["Sales"]
+        .sum()
+        .sort_values(ascending=False)
+        .head(limit)
+    )
+
+    return top_products
+
+def get_monthly_profit(df):
+    """
+    Calculate total profit for each month.
+    """
+
+    df = df.copy()
+
+    df["Order Date"] = pd.to_datetime(df["Order Date"])
+
+    df["Year-Month"] = df["Order Date"].dt.to_period("M")
+
+    monthly_profit = (
+        df.groupby("Year-Month")["Profit"]
+        .sum()
+    )
+
+    return monthly_profit
