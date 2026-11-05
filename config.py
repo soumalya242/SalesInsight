@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
+#database creadiantial
 class Config:
     SECRET_KEY = os.getenv("SECRET_KEY")
 
