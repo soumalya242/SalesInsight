@@ -2,12 +2,17 @@ from flask import Flask
 from config import Config
 from database.db import db
 from database.models import SalesRecord, Upload
+from routes.dashboard import dashboard_bp
 
 # Create Flask application
 app = Flask(__name__)
 
 # Load configuration
 app.config.from_object(Config)
+
+#db.init_app(app)
+#register dashboard api
+app.register_blueprint(dashboard_bp)
 
 # Initialize database
 db.init_app(app)
