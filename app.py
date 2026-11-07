@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from config import Config
 from database.db import db
 from database.models import SalesRecord, Upload
@@ -23,6 +23,15 @@ with app.app_context():
 @app.route("/")
 def home():
     return "Welcome to SalesInsight Dashboard!"
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
+@app.route("/products")
+def products():
+    return render_template("products.html")
+
 
 
 if __name__ == "__main__":
