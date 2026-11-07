@@ -246,3 +246,42 @@ async function loadRegionAnalysis() {
 
 
 
+async function loadTopProducts() {
+    try {
+        const response = await fetch("/api/top-products");
+
+        if (!response.ok) {
+            throw new Error("Failed to load top products");
+        }
+
+        const data = await response.json();
+
+        const products = data.map(item => item.product_name);
+        const sales = data.map(item => item.sales);
+
+        const trace = {
+            x: sales,
+            y: products,
+            type: "bar",
+            orientation: "h",
+            marker: { color: "#5145F5" }
+        };
+
+        const layout = {
+            autosize: true,
+            margin: { t: 20, r: 30, b: 50, l: 300 },
+            xaxis: { title: "Sales", gridcolor: "#E2E8F0" },
+            yaxis: { autorange: "reversed" },
+            paper_bgcolor: "white",
+            plot_bgcolor: "white"
+        };
+
+        Plotly.newPlot("top-products-chart", [trace], layout, {
+            responsive: true,
+            displayModeBar: false
+        });
+
+    } catch (error) {
+        console.error("Top products chart error:", error);
+    }
+}
