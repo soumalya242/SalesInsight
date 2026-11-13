@@ -1,3 +1,0 @@
-Order ID,Order Date,Ship Date,Customer ID,Customer Name,Segment,Region,Category,Sub-Category,Product ID,Product Name,Sales,Quantity,Discount,Profit
-ORD001,01/15/2025,01/18/2025,C001,John Doe,Consumer,West,Technology,Phones,P001,Test Phone,1000,2,0.1,200
-ORD002,02/10/2025,02/12/2025,C002,Jane Doe,Corporate,East,Furniture,Chairs,P002,Test Chair,500,1,0.2,100
