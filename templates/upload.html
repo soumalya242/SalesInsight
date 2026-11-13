@@ -222,8 +222,121 @@
   </div>
 </div>
 
+<!-- Toast notifications (bottom right) -->
+<style>
+  @keyframes toast-bounce-in {
+    0% {
+      opacity: 0;
+      transform: translateY(60px) scale(0.85);
+    }
+    45% {
+      opacity: 1;
+      transform: translateY(-14px) scale(1.04);
+    }
+    65% {
+      transform: translateY(7px) scale(0.98);
+    }
+    80% {
+      transform: translateY(-4px) scale(1.01);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes toast-out {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(60px);
+    }
+  }
+
+  .toast-enter {
+    animation: toast-bounce-in 0.8s cubic-bezier(0.34, 1.2, 0.64, 1) both;
+  }
+
+  .toast-leave {
+    animation: toast-out 0.35s ease-in both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .toast-enter,
+    .toast-leave {
+      animation-duration: 0.01s;
+    }
+  }
+</style>
+
+<div
+  id="toast-container"
+  class="pointer-events-none fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3"
+></div>
+
 {% block scripts %}
 <script>
+  function showToast(message, type = "success") {
+    const container = document.getElementById("toast-container");
+    const isSuccess = type === "success";
+
+    const toast = document.createElement("div");
+    toast.className =
+      "toast-enter pointer-events-auto flex max-w-sm items-center gap-3 rounded-2xl border border-white/80 bg-white/85 backdrop-blur-xl px-4 py-3 shadow-[0_12px_40px_rgba(124,106,190,0.3)]";
+
+    const iconWrap = document.createElement("div");
+    iconWrap.className =
+      "flex h-10 w-10 shrink-0 items-center justify-center rounded-full " +
+      (isSuccess
+        ? "bg-emerald-100 text-emerald-600"
+        : "bg-red-100 text-red-500");
+    iconWrap.innerHTML = isSuccess
+      ? '<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>'
+      : '<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>';
+
+    const textWrap = document.createElement("div");
+    textWrap.className = "min-w-0 flex-1";
+
+    const title = document.createElement("p");
+    title.className = "text-sm font-semibold text-slate-800";
+    title.textContent = isSuccess ? "Success" : "Something went wrong";
+
+    const body = document.createElement("p");
+    body.className = "text-sm text-slate-500 break-words";
+    body.textContent = message;
+
+    textWrap.appendChild(title);
+    textWrap.appendChild(body);
+
+    const closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.className =
+      "h-7 w-7 shrink-0 rounded-full text-slate-400 text-lg leading-none transition hover:bg-slate-100 hover:text-slate-600";
+    closeBtn.innerHTML = "&times;";
+
+    toast.appendChild(iconWrap);
+    toast.appendChild(textWrap);
+    toast.appendChild(closeBtn);
+    container.appendChild(toast);
+
+    let removed = false;
+    function dismiss() {
+      if (removed) return;
+      removed = true;
+      toast.classList.remove("toast-enter");
+      toast.classList.add("toast-leave");
+      toast.addEventListener("animationend", () => toast.remove(), {
+        once: true,
+      });
+    }
+
+    closeBtn.addEventListener("click", dismiss);
+    setTimeout(dismiss, 4500);
+  }
+
   const dropArea = document.getElementById("drop-area");
   const fileInput = document.getElementById("csv-file");
   const browseButton = document.getElementById("browse-button");
@@ -274,7 +387,7 @@
     if (!file) return;
 
     if (!file.name.toLowerCase().endsWith(".csv")) {
-      alert("Please select a CSV file.");
+      showToast("Please select a CSV file.", "error");
       fileInput.value = "";
       filePreview.classList.add("hidden");
       return;
@@ -305,7 +418,7 @@
     const file = fileInput.files[0];
 
     if (!file) {
-      alert("Please select a CSV file first.");
+      showToast("Please select a CSV file first.", "error");
       return;
     }
 
@@ -327,11 +440,11 @@
         throw new Error(result.error || "Upload failed");
       }
 
-      alert(result.message);
+      showToast(result.message || "Dataset uploaded successfully.", "success");
 
       console.log("Uploaded file:", result.filename);
     } catch (error) {
-      alert(error.message);
+      showToast(error.message, "error");
       console.error("Upload error:", error);
     } finally {
       uploadButton.disabled = false;
