@@ -1,0 +1,384 @@
+{% extends "base.html" %} {% block title %}SalesInsight | Turn sales data into
+decisions{% endblock %} {% block content %}
+
+<div
+  class="relative min-h-screen overflow-hidden bg-gradient-to-br bg-linear-to-br from-[#f3efff] via-[#fbf3fb] to-[#fff0e8]"
+>
+  <!-- Background glow -->
+  <div class="pointer-events-none absolute inset-0">
+    <div
+      class="absolute -top-32 -left-32 h-[28rem] w-[28rem] rounded-full bg-violet-300/40 blur-3xl"
+    ></div>
+    <div
+      class="absolute top-1/4 -right-32 h-[28rem] w-[28rem] rounded-full bg-pink-200/50 blur-3xl"
+    ></div>
+    <div
+      class="absolute bottom-0 left-1/3 h-[28rem] w-[36rem] rounded-full bg-orange-200/50 blur-3xl"
+    ></div>
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
+    <!-- Navigation -->
+    <header
+      class="mt-4 sm:mt-6 flex items-center justify-between gap-4 rounded-full border border-white/70 bg-white/50 backdrop-blur-xl px-5 py-3 shadow-[0_8px_32px_rgba(124,106,190,0.12)]"
+    >
+      <a href="/" class="flex items-center gap-3">
+        <div
+          class="h-9 w-9 rounded-full bg-gradient-to-br bg-linear-to-br from-violet-500 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-violet-300/60"
+        >
+          <svg
+            class="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 17l6-6 4 4 8-8"
+            />
+          </svg>
+        </div>
+        <span class="text-base font-bold text-slate-900 tracking-tight"
+          >Sales<span class="text-violet-600">Insight</span></span
+        >
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+        <a href="#features" class="transition hover:text-violet-600">Features</a>
+        <a href="#how-it-works" class="transition hover:text-violet-600"
+          >How it works</a
+        >
+      </nav>
+
+      <a
+        href="/dashboard"
+        class="rounded-full bg-white px-5 py-2 text-sm font-semibold text-violet-600 shadow-sm border border-white transition hover:bg-violet-50"
+      >
+        Open Dashboard
+      </a>
+    </header>
+
+    <!-- Hero -->
+    <section class="pt-16 sm:pt-24 pb-16 text-center">
+      <span
+        class="inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/60 backdrop-blur px-4 py-1.5 text-xs font-medium text-violet-600"
+      >
+        <span class="h-1.5 w-1.5 rounded-full bg-violet-500"></span>
+        Sales analytics, made simple
+      </span>
+
+      <h1
+        class="mt-6 text-4xl sm:text-6xl font-bold tracking-tight text-slate-900 leading-[1.1]"
+      >
+        Turn your sales data into
+        <span
+          class="bg-gradient-to-r bg-linear-to-r from-violet-600 to-indigo-500 bg-clip-text text-transparent"
+          >clear decisions</span
+        >
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-slate-500">
+        Upload your sales CSV and instantly see revenue, profit, top products
+        and regional performance in one clean, easy-to-read dashboard.
+      </p>
+
+      <div class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a
+          href="/upload"
+          class="w-full sm:w-auto rounded-full bg-gradient-to-r bg-linear-to-r from-violet-500 to-indigo-500 px-8 py-3 font-semibold text-white shadow-lg shadow-violet-300/60 transition hover:from-violet-600 hover:to-indigo-600"
+        >
+          Upload your data
+        </a>
+        <a
+          href="/dashboard"
+          class="w-full sm:w-auto rounded-full border border-white bg-white/60 backdrop-blur px-8 py-3 font-semibold text-slate-700 transition hover:bg-white"
+        >
+          View dashboard
+        </a>
+      </div>
+
+      <!-- Product preview -->
+      <div class="relative mx-auto mt-16 max-w-4xl">
+        <div
+          class="rounded-[2rem] border border-white/70 bg-white/50 backdrop-blur-xl p-4 sm:p-6 shadow-[0_24px_80px_rgba(124,106,190,0.25)]"
+        >
+          <!-- Window dots -->
+          <div class="flex items-center gap-1.5 mb-4 px-1">
+            <span class="h-2.5 w-2.5 rounded-full bg-pink-300"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-amber-300"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-emerald-300"></span>
+          </div>
+
+          <!-- Mini KPI cards -->
+          <div class="grid grid-cols-3 gap-3 sm:gap-4">
+            <div class="rounded-2xl bg-white/70 p-4 text-left">
+              <div class="h-8 w-8 rounded-xl bg-violet-100"></div>
+              <div class="mt-4 h-3 w-2/3 rounded-full bg-slate-200"></div>
+              <div class="mt-2 h-2 w-1/3 rounded-full bg-slate-100"></div>
+            </div>
+            <div class="rounded-2xl bg-white/70 p-4 text-left">
+              <div class="h-8 w-8 rounded-xl bg-emerald-100"></div>
+              <div class="mt-4 h-3 w-2/3 rounded-full bg-slate-200"></div>
+              <div class="mt-2 h-2 w-1/3 rounded-full bg-slate-100"></div>
+            </div>
+            <div class="rounded-2xl bg-white/70 p-4 text-left">
+              <div class="h-8 w-8 rounded-xl bg-sky-100"></div>
+              <div class="mt-4 h-3 w-2/3 rounded-full bg-slate-200"></div>
+              <div class="mt-2 h-2 w-1/3 rounded-full bg-slate-100"></div>
+            </div>
+          </div>
+
+          <!-- Mini chart -->
+          <div class="mt-3 sm:mt-4 rounded-2xl bg-white/70 p-4 sm:p-6">
+            <div class="h-3 w-32 rounded-full bg-slate-200"></div>
+            <div class="mt-6 flex h-40 sm:h-52 items-end gap-2 sm:gap-3">
+              <div class="flex-1 rounded-t-xl bg-violet-200 h-[35%]"></div>
+              <div class="flex-1 rounded-t-xl bg-violet-200 h-[50%]"></div>
+              <div class="flex-1 rounded-t-xl bg-violet-200 h-[42%]"></div>
+              <div class="flex-1 rounded-t-xl bg-violet-200 h-[65%]"></div>
+              <div class="flex-1 rounded-t-xl bg-gradient-to-t bg-linear-to-t from-violet-500 to-indigo-400 h-[90%]"></div>
+              <div class="flex-1 rounded-t-xl bg-violet-200 h-[58%]"></div>
+              <div class="flex-1 rounded-t-xl bg-violet-200 h-[72%]"></div>
+              <div class="flex-1 rounded-t-xl bg-violet-200 h-[48%]"></div>
+              <div class="hidden sm:block flex-1 rounded-t-xl bg-violet-200 h-[60%]"></div>
+              <div class="hidden sm:block flex-1 rounded-t-xl bg-violet-200 h-[80%]"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="py-16 sm:py-20">
+      <div class="text-center">
+        <p class="text-xs font-semibold uppercase tracking-widest text-violet-600">
+          Features
+        </p>
+        <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
+          Everything you need to understand your sales
+        </h2>
+        <p class="mx-auto mt-4 max-w-xl text-slate-500">
+          No complicated setup. Just your data and a clear view of how your
+          business is performing.
+        </p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Overview -->
+        <div
+          class="rounded-3xl border border-white/70 bg-white/55 backdrop-blur-xl p-6 shadow-[0_8px_32px_rgba(124,106,190,0.12)] transition hover:bg-white/75 hover:-translate-y-1"
+        >
+          <div
+            class="h-12 w-12 rounded-2xl bg-violet-100 text-violet-600 flex items-center justify-center"
+          >
+            <svg
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+              />
+            </svg>
+          </div>
+          <h3 class="mt-5 text-lg font-semibold text-slate-800">Sales overview</h3>
+          <p class="mt-2 text-sm text-slate-500">
+            Track total sales, profit, orders, quantity and average order value
+            at a glance.
+          </p>
+        </div>
+
+        <!-- Products -->
+        <div
+          class="rounded-3xl border border-white/70 bg-white/55 backdrop-blur-xl p-6 shadow-[0_8px_32px_rgba(124,106,190,0.12)] transition hover:bg-white/75 hover:-translate-y-1"
+        >
+          <div
+            class="h-12 w-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center"
+          >
+            <svg
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+              />
+            </svg>
+          </div>
+          <h3 class="mt-5 text-lg font-semibold text-slate-800">Product analysis</h3>
+          <p class="mt-2 text-sm text-slate-500">
+            Discover your top 10 products and see which ones drive the most
+            revenue.
+          </p>
+        </div>
+
+        <!-- Regions -->
+        <div
+          class="rounded-3xl border border-white/70 bg-white/55 backdrop-blur-xl p-6 shadow-[0_8px_32px_rgba(124,106,190,0.12)] transition hover:bg-white/75 hover:-translate-y-1"
+        >
+          <div
+            class="h-12 w-12 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center"
+          >
+            <svg
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <h3 class="mt-5 text-lg font-semibold text-slate-800">Regional insights</h3>
+          <p class="mt-2 text-sm text-slate-500">
+            Compare sales and profit across regions to spot where you perform
+            best.
+          </p>
+        </div>
+
+        <!-- Upload -->
+        <div
+          class="rounded-3xl border border-white/70 bg-white/55 backdrop-blur-xl p-6 shadow-[0_8px_32px_rgba(124,106,190,0.12)] transition hover:bg-white/75 hover:-translate-y-1"
+        >
+          <div
+            class="h-12 w-12 rounded-2xl bg-pink-100 text-pink-600 flex items-center justify-center"
+          >
+            <svg
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M16 8l-4-4m0 0L8 8m4-4v12"
+              />
+            </svg>
+          </div>
+          <h3 class="mt-5 text-lg font-semibold text-slate-800">Easy CSV upload</h3>
+          <p class="mt-2 text-sm text-slate-500">
+            Drag and drop your sales file and start exploring in seconds.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how-it-works" class="py-16 sm:py-20">
+      <div class="text-center">
+        <p class="text-xs font-semibold uppercase tracking-widest text-violet-600">
+          How it works
+        </p>
+        <h2 class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
+          From spreadsheet to insight in three steps
+        </h2>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div
+          class="rounded-3xl border border-white/70 bg-white/55 backdrop-blur-xl p-8 shadow-[0_8px_32px_rgba(124,106,190,0.12)]"
+        >
+          <span
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br bg-linear-to-br from-violet-500 to-indigo-500 text-sm font-bold text-white shadow-md shadow-violet-300/60"
+            >1</span
+          >
+          <h3 class="mt-5 text-lg font-semibold text-slate-800">Upload your CSV</h3>
+          <p class="mt-2 text-sm text-slate-500">
+            Drop in the sales dataset you already have. No special formatting
+            tools needed.
+          </p>
+        </div>
+
+        <div
+          class="rounded-3xl border border-white/70 bg-white/55 backdrop-blur-xl p-8 shadow-[0_8px_32px_rgba(124,106,190,0.12)]"
+        >
+          <span
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br bg-linear-to-br from-violet-500 to-indigo-500 text-sm font-bold text-white shadow-md shadow-violet-300/60"
+            >2</span
+          >
+          <h3 class="mt-5 text-lg font-semibold text-slate-800">
+            We analyze the numbers
+          </h3>
+          <p class="mt-2 text-sm text-slate-500">
+            SalesInsight works out your key metrics, trends, products and
+            regions for you.
+          </p>
+        </div>
+
+        <div
+          class="rounded-3xl border border-white/70 bg-white/55 backdrop-blur-xl p-8 shadow-[0_8px_32px_rgba(124,106,190,0.12)]"
+        >
+          <span
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br bg-linear-to-br from-violet-500 to-indigo-500 text-sm font-bold text-white shadow-md shadow-violet-300/60"
+            >3</span
+          >
+          <h3 class="mt-5 text-lg font-semibold text-slate-800">
+            Explore your dashboard
+          </h3>
+          <p class="mt-2 text-sm text-slate-500">
+            Dive into interactive charts and make confident, data-backed
+            decisions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="pb-16 sm:pb-24">
+      <div
+        class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br bg-linear-to-br from-violet-600 to-indigo-600 px-6 py-14 sm:py-16 text-center shadow-[0_24px_80px_rgba(99,82,200,0.35)]"
+      >
+        <div
+          class="pointer-events-none absolute -top-16 -right-16 h-64 w-64 rounded-full bg-white/10"
+        ></div>
+        <div
+          class="pointer-events-none absolute -bottom-20 -left-10 h-64 w-64 rounded-full bg-white/10"
+        ></div>
+
+        <h2 class="relative text-3xl sm:text-4xl font-bold tracking-tight text-white">
+          Ready to see your sales clearly?
+        </h2>
+        <p class="relative mx-auto mt-4 max-w-xl text-violet-100">
+          Upload your first dataset and get your dashboard in moments.
+        </p>
+        <a
+          href="/upload"
+          class="relative mt-8 inline-block rounded-full bg-white px-8 py-3 font-semibold text-violet-600 shadow-lg transition hover:bg-violet-50"
+        >
+          Get started
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="flex flex-col sm:flex-row items-center justify-between gap-2 border-t border-white/70 py-8 text-sm text-slate-500"
+    >
+      <p>&copy; 2026 SalesInsight. All rights reserved.</p>
+      <div class="flex items-center gap-6">
+        <a href="/dashboard" class="transition hover:text-violet-600">Dashboard</a>
+        <a href="/products" class="transition hover:text-violet-600">Products</a>
+        <a href="/regions" class="transition hover:text-violet-600">Regions</a>
+        <a href="/upload" class="transition hover:text-violet-600">Upload</a>
+      </div>
+    </footer>
+  </div>
+</div>
+
+{% endblock %}

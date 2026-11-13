@@ -24,7 +24,7 @@ with app.app_context():
 
 @app.route("/")
 def home():
-    return "Welcome to SalesInsight Dashboard!"
+    return render_template("index.html")
 
 @app.route("/dashboard")
 def dashboard():
